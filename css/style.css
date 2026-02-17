@@ -946,17 +946,8 @@ td {
     }
 }
 
-/* --- Mobile Responsiveness --- */
-.mobile-only {
-    display: none;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
+/* --- Mobile Responsiveness (DEPRECATED: See responsive.css for active styles) --- */
+/*
 @media (max-width: 768px) {
     .mobile-only {
         display: block;
@@ -964,18 +955,15 @@ td {
 
     #main-app {
         grid-template-columns: 1fr;
-        /* Stack layout */
     }
 
     .sidebar {
         position: fixed;
         left: -280px;
-        /* Hide off-screen */
         top: 0;
         bottom: 0;
         width: 260px;
         background: var(--bg-color);
-        /* Need solid bg or glass */
         transition: left 0.3s ease;
         z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
@@ -985,7 +973,6 @@ td {
         left: 0;
     }
 
-    /* Overlay when sidebar is open */
     .sidebar-overlay {
         position: fixed;
         top: 0;
@@ -998,7 +985,6 @@ td {
         pointer-events: none;
         transition: opacity 0.3s;
         backdrop-filter: blur(4px);
-        /* Add blur for better focus */
     }
 
     .sidebar.open+.sidebar-overlay {
@@ -1022,6 +1008,7 @@ td {
         font-size: 2.5rem;
     }
 }
+*/
 
 /* --- Modal Styles --- */
 .modal-overlay {
