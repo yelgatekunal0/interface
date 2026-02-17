@@ -1,0 +1,838 @@
+/* ============================================
+   CRITICAL MOBILE LAYOUT FIXES
+   THESE STYLES OVERRIDE style.css MOBILE STYLES
+   ============================================ */
+
+/* Fix for all mobile devices - Hide sidebar by default */
+@media (max-width: 768px) {
+
+    /* CRITICAL: Override main app grid to single column */
+    #main-app {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 60px 1fr !important;
+        display: grid !important;
+    }
+
+    /* CRITICAL: Hide sidebar by default on mobile - IMPROVED VISIBILITY */
+    .sidebar {
+        position: fixed !important;
+        left: -300px !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 280px !important;
+        /* Stronger background for better visibility */
+        background: linear-gradient(135deg, rgba(13, 17, 23, 0.98) 0%, rgba(22, 27, 34, 0.98) 100%) !important;
+        transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 10000 !important;
+        box-shadow: 4px 0 30px rgba(0, 0, 0, 0.9) !important;
+        grid-row: 1 / -1 !important;
+        grid-column: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding: 1.5rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Light mode sidebar */
+    [data-theme="light"] .sidebar {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 242, 245, 0.98) 100%) !important;
+        box-shadow: 4px 0 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    /* CRITICAL: Show sidebar when open class is added */
+    .sidebar.open {
+        left: 0 !important;
+        transform: translateX(0) !important;
+    }
+
+    /* Logo area - better visibility */
+    .sidebar .logo-area {
+        font-size: 1.5rem !important;
+        margin-bottom: 2.5rem !important;
+        color: var(--accent-color) !important;
+        font-weight: 800 !important;
+        padding-bottom: 1rem !important;
+        border-bottom: 2px solid rgba(0, 240, 255, 0.3) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.8rem !important;
+    }
+
+    /* Navigation links container */
+    .sidebar .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        flex: 1 !important;
+    }
+
+    /* Navigation items - MUCH better visibility */
+    .sidebar .nav-item {
+        padding: 1rem 1.2rem !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        color: var(--text-color) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        min-height: 52px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+    }
+
+    /* Hover state for nav items */
+    .sidebar .nav-item:hover {
+        background: rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(0, 240, 255, 0.4) !important;
+        transform: translateX(4px) !important;
+    }
+
+    /* Active nav item */
+    .sidebar .nav-item.active {
+        background: rgba(0, 240, 255, 0.25) !important;
+        border-color: var(--accent-color) !important;
+        color: var(--accent-color) !important;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4) !important;
+    }
+
+    /* Nav item icons */
+    .sidebar .nav-item i {
+        font-size: 1.4rem !important;
+        opacity: 1 !important;
+        min-width: 24px !important;
+    }
+
+    /* User profile - better visibility */
+    .sidebar .user-profile {
+        margin-top: auto !important;
+        padding-top: 1.5rem !important;
+        border-top: 2px solid rgba(255, 255, 255, 0.15) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+    }
+
+    .sidebar .avatar {
+        width: 48px !important;
+        height: 48px !important;
+        background: var(--accent-color) !important;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.6) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    .sidebar .user-info {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .sidebar .user-info .name {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        color: var(--text-color) !important;
+    }
+
+    .sidebar .user-info .role {
+        font-size: 0.85rem !important;
+        color: var(--text-muted) !important;
+        opacity: 0.9 !important;
+    }
+
+    /* CRITICAL: Sidebar Overlay - Must be separate element */
+    .sidebar-overlay {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        z-index: 9999 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transition: opacity 0.35s ease, visibility 0.35s ease !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+
+    /* CRITICAL: Show overlay when it has the 'show' class */
+    .sidebar-overlay.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    /* Main content takes full width */
+    .main-content {
+        grid-column: 1 / -1 !important;
+        grid-row: 2 / -1 !important;
+        width: 100% !important;
+    }
+
+    /* Top bar adjustments */
+    .top-bar {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+        padding: 0 1rem !important;
+        height: 60px !important;
+    }
+
+    /* CRITICAL: Hamburger menu button - VERY visible */
+    #menu-toggle.mobile-only,
+    .mobile-only {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 46px !important;
+        height: 46px !important;
+        background: rgba(0, 240, 255, 0.15) !important;
+        border: 2px solid rgba(0, 240, 255, 0.4) !important;
+        border-radius: 10px !important;
+        color: var(--accent-color) !important;
+        font-size: 1.4rem !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+    }
+
+    #menu-toggle.mobile-only:hover,
+    .mobile-only:hover {
+        background: rgba(0, 240, 255, 0.25) !important;
+        border-color: var(--accent-color) !important;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
+    }
+
+    #menu-toggle.mobile-only:active,
+    .mobile-only:active {
+        background: rgba(0, 240, 255, 0.3) !important;
+        transform: scale(0.95) !important;
+    }
+
+    /* Prevent body scroll when sidebar is open */
+    body.sidebar-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+    }
+
+    /* Ensure views container doesn't overflow */
+    #views-container {
+        overflow-x: hidden !important;
+    }
+}
+
+/* Small Mobile Devices (320px - 480px) */
+@media (max-width: 480px) {
+
+    /* Introduction Page */
+    .intro-title {
+        font-size: 2rem !important;
+        letter-spacing: -1px !important;
+        padding: 0 1rem;
+    }
+
+    .intro-subtitle {
+        font-size: 0.9rem !important;
+        padding: 0 1.5rem;
+        margin-bottom: 2rem !important;
+    }
+
+    .enter-btn {
+        padding: 0.8rem 2rem !important;
+        font-size: 1rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* Top Bar */
+    .top-bar {
+        padding: 0 1rem !important;
+        height: 55px !important;
+    }
+
+    #page-title {
+        font-size: 0.85rem !important;
+    }
+
+    .header-actions {
+        gap: 0.5rem !important;
+    }
+
+    .icon-btn {
+        font-size: 1rem !important;
+        padding: 0.4rem !important;
+    }
+
+    /* Chat Container */
+    .chat-container {
+        padding: 1rem 0.5rem !important;
+    }
+
+    .chat-history {
+        gap: 1rem !important;
+        padding-bottom: 100px !important;
+    }
+
+    .message {
+        max-width: 90% !important;
+    }
+
+    .msg-bubble {
+        padding: 0.8rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .msg-meta {
+        font-size: 0.7rem !important;
+    }
+
+    /* Chat Input */
+    .chat-input-area {
+        width: 95% !important;
+        bottom: 1rem !important;
+        padding: 0.4rem !important;
+    }
+
+    .input-wrapper {
+        padding: 0.4rem 0.8rem !important;
+    }
+
+    #user-input {
+        font-size: 0.9rem !important;
+        padding: 0.6rem !important;
+    }
+
+    .send-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .icon-btn.small {
+        font-size: 0.9rem !important;
+    }
+
+    /* Inventory View */
+    .panel-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    .panel-header h2 {
+        font-size: 1.3rem !important;
+    }
+
+    .controls {
+        flex-direction: column !important;
+        width: 100%;
+        gap: 0.5rem !important;
+    }
+
+    .search-bar {
+        min-width: 100% !important;
+        width: 100%;
+        font-size: 0.9rem !important;
+    }
+
+    .action-btn {
+        width: 100%;
+        font-size: 0.9rem !important;
+    }
+
+    /* Table Responsive */
+    .table-container {
+        overflow-x: auto !important;
+    }
+
+    table {
+        min-width: 600px;
+        font-size: 0.85rem !important;
+    }
+
+    th,
+    td {
+        padding: 0.8rem 0.8rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    th {
+        font-size: 0.75rem !important;
+    }
+
+    /* Analytics View */
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .stat-card {
+        padding: 1.2rem !important;
+    }
+
+    .stat-card h3 {
+        font-size: 0.85rem !important;
+    }
+
+    .stat-card .value {
+        font-size: 1.5rem !important;
+    }
+
+    .chart-container {
+        height: 250px !important;
+        padding: 1rem !important;
+    }
+
+    .chart-container h3 {
+        font-size: 1rem !important;
+    }
+
+    .bar {
+        width: 30px !important;
+    }
+
+    /* Scanner View */
+    .upload-zone {
+        margin: 0.5rem !important;
+        padding: 2rem 1rem !important;
+    }
+
+    .upload-zone .icon {
+        font-size: 3rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .upload-zone h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .upload-zone p {
+        font-size: 0.85rem !important;
+    }
+
+    .scan-result {
+        margin: 0 0.5rem 1rem 0.5rem !important;
+        padding: 1rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    .scan-result h3 {
+        font-size: 1rem !important;
+    }
+
+    .scan-result p {
+        font-size: 0.9rem !important;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95% !important;
+        max-width: none !important;
+    }
+
+    .modal-header {
+        padding: 1rem !important;
+    }
+
+    .modal-header h3 {
+        font-size: 1rem !important;
+    }
+
+    .modal-body {
+        padding: 1rem !important;
+    }
+
+    .form-row {
+        flex-direction: column !important;
+        gap: 0 !important;
+    }
+
+    .form-group {
+        margin-bottom: 0.8rem !important;
+    }
+
+    input,
+    select {
+        font-size: 0.9rem !important;
+        padding: 0.7rem !important;
+    }
+
+    .modal-footer {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .btn-cancel,
+    .btn-save {
+        width: 100%;
+        padding: 0.7rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Toast Notifications */
+    #toast-container {
+        bottom: 10px !important;
+        right: 10px !important;
+        left: 10px;
+    }
+
+    .toast {
+        min-width: auto !important;
+        width: 100%;
+        padding: 0.8rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Sidebar - DO NOT override main mobile styles */
+    /* Sidebar width already set in main mobile section */
+
+    /* Logo and nav already styled in main mobile section */
+
+    /* User profile already styled in main mobile section */
+
+    /* View Sections */
+    .view-section {
+        padding: 1rem 0.5rem !important;
+    }
+
+    .view-section h2 {
+        font-size: 1.3rem !important;
+        margin-bottom: 1rem;
+    }
+
+    /* Badge */
+    .badge {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.5rem !important;
+    }
+}
+
+/* Medium Mobile Devices (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+
+    /* Introduction Page */
+    .intro-title {
+        font-size: 3rem !important;
+        letter-spacing: -1.5px !important;
+    }
+
+    .intro-subtitle {
+        font-size: 1rem !important;
+        margin-bottom: 2.5rem !important;
+    }
+
+    .enter-btn {
+        padding: 0.9rem 2.5rem !important;
+        font-size: 1.1rem !important;
+    }
+
+    /* Top Bar */
+    .top-bar {
+        padding: 0 1.5rem !important;
+    }
+
+    /* Chat */
+    .chat-container {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .message {
+        max-width: 85% !important;
+    }
+
+    .chat-input-area {
+        width: 92% !important;
+    }
+
+    /* Inventory */
+    .panel-header {
+        flex-wrap: wrap;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    .search-bar {
+        min-width: 200px !important;
+    }
+
+    /* Analytics */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Table */
+    table {
+        font-size: 0.9rem !important;
+    }
+
+    th,
+    td {
+        padding: 0.9rem 1rem !important;
+    }
+}
+
+/* Tablet Devices (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* Adjust grid for tablets */
+    #main-app {
+        grid-template-columns: 220px 1fr !important;
+    }
+
+    .sidebar {
+        padding: 1.2rem !important;
+    }
+
+    .logo-area {
+        font-size: 1.4rem !important;
+    }
+
+    .nav-item {
+        padding: 0.7rem 0.9rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* Chat */
+    .message {
+        max-width: 75% !important;
+    }
+
+    .chat-input-area {
+        width: 92% !important;
+    }
+
+    /* Analytics */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    /* Table */
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .intro-title {
+        font-size: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .intro-subtitle {
+        font-size: 0.9rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .enter-btn {
+        padding: 0.6rem 2rem !important;
+        font-size: 0.95rem !important;
+    }
+
+    .top-bar {
+        height: 50px !important;
+    }
+
+    .chat-history {
+        padding-bottom: 90px !important;
+    }
+
+    .chat-input-area {
+        bottom: 0.5rem !important;
+    }
+
+    .sidebar {
+        width: 200px !important;
+    }
+
+    .logo-area {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .nav-item {
+        padding: 0.5rem 0.7rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .stat-card {
+        padding: 1rem !important;
+    }
+
+    .stat-card .value {
+        font-size: 1.5rem !important;
+    }
+
+    .chart-container {
+        height: 200px !important;
+    }
+}
+
+/* Touch-Friendly Enhancements */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Increase touch targets */
+    .icon-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .nav-item {
+        min-height: 44px;
+    }
+
+    .action-btn {
+        min-height: 44px;
+    }
+
+    .send-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Remove hover effects on touch devices */
+    .icon-btn:hover,
+    .nav-item:hover,
+    .action-btn:hover {
+        transform: none;
+    }
+
+    /* Add active states for better feedback */
+    .icon-btn:active {
+        background: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .nav-item:active {
+        background: rgba(0, 240, 255, 0.15) !important;
+    }
+
+    .action-btn:active {
+        opacity: 0.8;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+    /* Ensure crisp rendering on retina displays */
+    .glass-panel {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .aurora-blob {
+        filter: blur(100px);
+    }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .aurora-blob {
+        animation: none !important;
+    }
+
+    .status-indicator {
+        animation: none !important;
+    }
+}
+
+/* Dark Mode Specific Mobile Adjustments */
+@media (max-width: 768px) {
+    [data-theme="dark"] .sidebar {
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(20px);
+    }
+
+    [data-theme="dark"] .glass-panel {
+        background: rgba(22, 27, 34, 0.85);
+    }
+}
+
+/* Light Mode Specific Mobile Adjustments */
+@media (max-width: 768px) {
+    [data-theme="light"] .sidebar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+    }
+
+    [data-theme="light"] .glass-panel {
+        background: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Safe Area Insets for Notched Devices */
+@supports (padding: max(0px)) {
+    .top-bar {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .sidebar {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .chat-input-area {
+        bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    #toast-container {
+        bottom: max(20px, calc(20px + env(safe-area-inset-bottom)));
+        right: max(20px, calc(20px + env(safe-area-inset-right)));
+    }
+}
+
+/* Prevent Text Selection on Interactive Elements */
+@media (max-width: 768px) {
+
+    .icon-btn,
+    .nav-item,
+    .action-btn,
+    .send-btn,
+    .btn-cancel,
+    .btn-save {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* Optimize Scrolling Performance */
+@media (max-width: 768px) {
+
+    .chat-history,
+    .view-section,
+    .table-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+}
+
+/* Fix for iOS Input Zoom */
+@media (max-width: 768px) {
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}

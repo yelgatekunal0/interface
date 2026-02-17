@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Pharma AI - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <!-- Using Font Awesome for Icons (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <div class="aurora-container">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+    </div>
+
+    <div id="main-app" style="display: grid;">
+        <!-- Style inline to override initial hidden state if JS loads late, though JS removes it usually. Actually style.css hides it by default, we need to remove that or use a class. JS will handle display. -->
+
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="logo-area">
+                <i class="fa-solid fa-dna"></i>
+                <span>PharmaAI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" data-view="view-chat"><i class="fa-solid fa-robot"></i> Agent</a>
+                <a href="#" class="nav-item" data-view="view-inventory"><i class="fa-solid fa-pills"></i> Inventory</a>
+                <a href="#" class="nav-item" data-view="view-analytics"><i class="fa-solid fa-chart-line"></i>
+                    Analytics</a>
+                <a href="#" class="nav-item" data-view="view-scanner"><i class="fa-solid fa-file-prescription"></i> Rx
+                    Scanner</a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div class="user-info">
+                    <span class="name">Dr. Strange</span>
+                    <span class="role">Admin</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar glass-panel">
+                <div class="header-left">
+                    <button id="menu-toggle" class="icon-btn mobile-only">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="agent-status">
+                        <div class="status-indicator"></div>
+                        <span id="page-title">Agent Active</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="icon-btn">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Views Container -->
+            <div id="views-container">
+
+                <!-- 1. Chat View (Default) -->
+                <div id="view-chat" class="view-section active">
+                    <div class="chat-container">
+                        <div id="chat-history" class="chat-history">
+                            <!-- Messages will be injected here -->
+                        </div>
+
+                        <div class="chat-input-area glass-panel">
+                            <div class="input-wrapper">
+                                <input type="text" id="user-input"
+                                    placeholder="Ask about medicines, interactions, or inventory..." autocomplete="off">
+                                <button id="mic-btn" class="icon-btn small"><i
+                                        class="fa-solid fa-microphone"></i></button>
+                                <button id="send-btn" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Inventory View -->
+                <div id="view-inventory" class="view-section">
+                    <div class="panel-header">
+                        <h2>Inventory Management</h2>
+                        <div class="controls">
+                            <input type="text" id="inventory-search" placeholder="Search medicines..."
+                                class="search-bar glass-panel">
+                            <button id="add-stock-btn" class="action-btn">Add Stock</button>
+                        </div>
+                    </div>
+                    <div class="table-container glass-panel">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Medicine Name</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. Analytics View -->
+                <div id="view-analytics" class="view-section">
+                    <h2>Performance Analytics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card glass-panel">
+                            <h3>Total Sales</h3>
+                            <div class="value">$12,450</div>
+                            <div class="trend up">+15% <i class="fa-solid fa-arrow-trend-up"></i></div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <h3>Prescriptions</h3>
+                            <div class="value">340</div>
+                            <div class="trend up">+5% <i class="fa-solid fa-arrow-trend-up"></i></div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <h3>Low Stock Items</h3>
+                            <div class="value warning">12</div>
+                            <div class="trend down">-2 <i class="fa-solid fa-arrow-trend-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="charts-area">
+                        <div class="chart-container glass-panel">
+                            <h3>Monthly Trends</h3>
+                            <div class="bar-chart">
+                                <div class="bar" style="height: 60%;" title="Jan"></div>
+                                <div class="bar" style="height: 80%;" title="Feb"></div>
+                                <div class="bar" style="height: 45%;" title="Mar"></div>
+                                <div class="bar" style="height: 90%;" title="Apr"></div>
+                                <div class="bar" style="height: 70%;" title="May"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Rx Scanner View -->
+                <div id="view-scanner" class="view-section">
+                    <h2>Prescription Scanner</h2>
+                    <div class="upload-zone glass-panel" id="drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up icon"></i>
+                        <h3>Drag & Drop Prescription Here</h3>
+                        <p>or click to browse files</p>
+                        <input type="file" hidden id="file-input">
+                    </div>
+                    <div class="scan-result glass-panel hidden" id="scan-result">
+                        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> AI Analysis</h3>
+                        <p>Detected: <strong>Amoxicillin 500mg</strong> (2x Daily)</p>
+                        <button class="action-btn">Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Action Modal -->
+    <div id="action-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Medicine</h3>
+                <button id="close-modal-btn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="inventory-form">
+                    <input type="hidden" id="item-id">
+                    <div class="form-group">
+                        <label for="item-name">Medicine Name</label>
+                        <input type="text" id="item-name" required placeholder="e.g. Amoxicillin 500mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-category">Category</label>
+                        <select id="item-category" required>
+                            <option value="Antibiotics">Antibiotics</option>
+                            <option value="Analgesics">Analgesics</option>
+                            <option value="Cardio">Cardio</option>
+                            <option value="Diabetes">Diabetes</option>
+                            <option value="Antihistamine">Antihistamine</option>
+                            <option value="Supplements">Supplements</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-stock">Stock</label>
+                            <input type="number" id="item-stock" required min="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="item-price">Price ($)</label>
+                            <input type="number" id="item-price" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" id="cancel-modal-btn">Cancel</button>
+                        <button type="submit" class="btn-save">Save Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
