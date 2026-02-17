@@ -1,3 +1,9 @@
+/* ============================================
+   CRITICAL MOBILE LAYOUT FIXES
+   THESE STYLES OVERRIDE style.css MOBILE STYLES
+   ============================================ */
+
+/* Fix for all mobile devices - Hide sidebar by default */
 @media (max-width: 768px) {
 
     /* CRITICAL: Simplified Arrangement for Mobile - NO GRID */
